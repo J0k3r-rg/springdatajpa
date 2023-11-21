@@ -7,10 +7,10 @@ import com.j0k3r.springdatajpa.models.dto.UserDtoRequest;
 
 public interface UserService {
     
-    UserDtoLogin findByUsernameDtoLogin(String username);
+    UserDtoLogin findByUsernameDtoLogin(String username) throws Exception;
 
-    Map<String,Object> findByUsername(String username);
+    Map<String,Object> findByUsername(String username) throws Exception;
 
-    void save(UserDtoRequest user);
+    void save(UserDtoRequest user) throws Exception;
 
 }

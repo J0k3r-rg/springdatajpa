@@ -14,12 +14,14 @@ public class RolServiceImpl implements RolService{
     private RolDao rolDao;
 
     @Override
-    public String findIdByName(String name) {
+    public String findIdByName(String name) throws Exception {
+        if (name == null || name.isEmpty()) throw new Exception("El nombre no puede ir vacio");
         return rolDao.findIdByName(name);
     }
 
     @Override
-    public void save(String name) {
+    public void save(String name) throws Exception {
+        if (name == null || name.isEmpty()) throw new Exception("El nombre no puede ir vacio");
         rolDao.save(RolEntity.builder()
                 .name(name)
                 .build());

@@ -1,6 +1,7 @@
 package com.j0k3r.springdatajpa.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,22 +20,21 @@ public class RolController {
     private RolService rolService;
 
     @PostMapping("/save")
-    public String save(@RequestBody RolDtoRequest rol){
+    public ResponseEntity<?> save(@RequestBody RolDtoRequest rol){
         try{
             rolService.save(rol.getName());
-            return "Rol saved";
+            return ResponseEntity.ok("Rol saved");
         } catch (Exception e){
-            return "Error: " + e.getMessage();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @GetMapping("/findIdByName")
-    public String findIdByName(@RequestParam("name") String name){
-        System.out.println("name: " + name);
+    public ResponseEntity<?> findIdByName(@RequestParam("name") String name){
         try{
-            return "Rol id: " + rolService.findIdByName(name);
+            return ResponseEntity.ok(rolService.findIdByName(name));
         } catch (Exception e){
-            return "Error: " + e.getMessage();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
